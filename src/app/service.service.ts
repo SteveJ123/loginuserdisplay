@@ -8,7 +8,7 @@ export class ServiceService {
 
   constructor(private http: HttpClient) { }
 
-  configUrl = 'https://loginuserdisplay.herokuapp.com ';
+  configUrl = 'https://loginuserdisplay.herokuapp.com';
 
   httpOptions = {
     headers: new HttpHeaders({
