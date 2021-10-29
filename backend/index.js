@@ -16,7 +16,7 @@ app.get('/', (req,res)=>{
 });
 app.use('/users', userRoute);
 
- mongoose.connect('mongodb+srv://testdb:test@cluster0.cdc3z.mongodb.net/userDetail?retryWrites=true&w=majority',{
+ mongoose.connect(process.env.mongodb_uri,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
      }
