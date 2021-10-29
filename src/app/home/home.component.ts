@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ServiceService } from '../service.service';
+
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,7 @@ export class HomeComponent implements OnInit {
   userFormDetails;
   
   constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder,
-    private http: HttpClient) { }
+    private http: HttpClient, private service: ServiceService) { }
 
   ngOnInit(): void {
     this.checkUserLogin();
@@ -92,6 +94,14 @@ export class HomeComponent implements OnInit {
 
   getUserDetail(event){
     event.preventDefault();
+
+    const httpOptionsPlain = {
+      headers: new HttpHeaders({
+        'Accept': 'text/plain',
+        'Content-Type': 'text/plain'
+      }),
+      'responseType': 'text'
+    };
     let obj={      
       emailId:  this.userFormDetails.get('emailId').value,
       password: this.userFormDetails.get('password').value      
@@ -99,7 +109,7 @@ export class HomeComponent implements OnInit {
 
     console.log(obj);
 
-    this.http.get('https://loginuserdisplay.herokuapp.com/users').subscribe((result:any)=>{
+    this.service.getdata().subscribe((result:any)=>{
       console.log(result);
       let filter:any = result.find(function(e, index){
           if(e.emailId === obj.emailId && e.password === obj.password){
