@@ -8,11 +8,11 @@ const app = express();
 app.use(cors());
 const bodyParser = require('body-parser')
 
+app.use(express.static(__dirname+'/..'+'/dist/loginuser'))
 app.use(bodyParser.json());
 
 app.get('/', (req,res)=>{
-    console.log("home page");
-    res.send("hello");
+    res.sendFile(__dirname+'/..'+'/dist/loginuser/index.html')
 });
 app.use('/api/users', userRoute);
 
@@ -30,6 +30,10 @@ app.use('/api/users', userRoute);
     // await new userSchema(user).save();
 }).catch(err=>console.log(err))
 
+
+app.get('**', (req,res)=>{
+    res.sendFile(__dirname+'/..'+'/dist/loginuser/index.html')
+});
 
 app.listen(port,()=>{
     console.log("app running");
