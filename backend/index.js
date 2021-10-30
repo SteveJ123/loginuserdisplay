@@ -14,7 +14,7 @@ app.get('/', (req,res)=>{
     console.log("home page");
     res.send("hello");
 });
-app.use('/users', userRoute);
+app.use('/api/users', userRoute);
 
  mongoose.connect(process.env.mongodb_uri,{
     useNewUrlParser: true,
