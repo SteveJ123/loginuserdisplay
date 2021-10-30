@@ -16,7 +16,7 @@ app.get('/', (req,res)=>{
 });
 app.use('/api/users', userRoute);
 
- mongoose.connect(process.env.mongodb_uri,{
+ mongoose.connect("mongodb+srv://testdb:test@cluster0.cdc3z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology: true,
      }
